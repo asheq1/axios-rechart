@@ -1,6 +1,11 @@
+import { useState } from "react";
 import Link from "../Link/Link";
+import { IoMdMenu } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 
 const Nav = () => {
+    const [open, setOpen] = useState(false);
+
     const routes = [
         { id: 1, path: '/home', name: 'Home' },
         { id: 2, path: '/about', name: 'About' },
@@ -10,8 +15,19 @@ const Nav = () => {
       ];
       
     return (
-        <nav >
-            <ul className="md:flex">
+        <nav className="bg-yellow-300 text-black p-6">
+            {/* toggle !open  */}
+            <div className="md:hidden text-3xl cursor-pointer " onClick={() => 
+                setOpen(!open)}>
+                {
+                    open === true ? <IoMdClose /> : <IoMdMenu />
+                }
+                
+            </div>
+                {/* way ${open ? '' : 'hidden'} ` */}
+            <ul className={`md:flex absolute md:static duration-1000
+               ${open ? 'top-14' : '-top-60'}
+               bg-yellow-200 px-6`}>
                 {
                     routes.map(route => <Link key={route.id}
                         route={route}
